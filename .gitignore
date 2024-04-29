@@ -1,0 +1,11 @@
+# byte code
+/__pycache__/
+
+# pycharm
+/.idea/*
+
+# virtualenv
+/.venv/
+
+# mac
+/.ds_store
