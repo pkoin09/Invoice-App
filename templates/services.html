@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block title %} Services {% endblock %}
+{% block main %}
+
+    <div class="container">
+        <div class="row py-5">
+            <h3>Services</h3>
+
+            <!-- forms -->
+            <div class="col-12">
+                <form action="/services" method="post" class="text-start">
+                    <div class="row mb-3">
+                        <div class="col-md-10">
+                            <label for="serevice" class="form-label">Service</label>
+                            <input class="form-control" type="text" placeholder="Services" name="service" aria-label="Services">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="rate" class="form-label">Rate</label>
+                            <input class="form-control" type="number" placeholder="Rate" name="rate" aria-label="rate">
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col">
+                            <label for="description" class="form-label">Service Desscription</label>
+                            <textarea class="form-control" placeholder="Description" name="description" rows="2" aria-label="service description"></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-col">Submit</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+
+        <!-- table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive-md">
+                    <table class="table table-borderless table-striped text-start">
+                        <thead>
+                            <tr class="table-info">
+                                <th>Service</th>
+                                <th>Rate Per Hour</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in rows %}
+                                <tr>
+                                    <td>{{row[2]}}</td>
+                                    <td>{{row[3] | usd}}</td>
+                                    <td>{{row[4]}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

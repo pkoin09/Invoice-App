@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Source+Sans+Pro:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="../static/invoice.css" >
+    <title>Invoice App: Invoiced</title>
+  </head>
+  <body>
+    <img
+      class="img-fluid"
+      alt="company logo"
+      src="img/white_logo.png"
+      style="width: 60px"
+    >
+
+    <aside>
+      <address id="from">
+        {{sender.name}}
+        {{sender.address}}
+        {{sender.city}}, {{sender.state}}
+        {{sender.country}}
+      </address>
+
+      <address id="to">
+        {{client.name}}
+        {{client.address}}
+        {{client.email}}
+      </address>
+    </aside>
+
+    <dl id="informations">
+      <dt>Invoice number</dt>
+      <dd>{{ inv }}</dd>
+      <dt>Date</dt>
+      <dd>{{ date }}</dd>
+    </dl>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Rate Per Hour</th>
+          <th>Hours</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for service in rows %}
+          <tr class="item">
+            <td>{{ service[7] }}</td>
+            <td>{{ service[8] | usd }}</td>
+            <td>{{ service[9] }}</td>
+            <td>{{ service[10] | usd }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <table id="total">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>Subtotal due</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          {% if subtotal %}
+          <td class="total">{{ subtotal | usd }}</td>
+          {% endif %}
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

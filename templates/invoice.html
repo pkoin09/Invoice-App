@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+{%block title%}
+Invoice
+{%endblock%}
+{% block main %}
+<div class="container mt-5 mb-3">
+  <div class="row d-flex justify-content-center text-start">
+    <div class="col-md-8">
+      <form action="/invoiced" method="post">
+        <div class="card shadow-sm">
+          <!-- logo -->
+          <div class="row-fluid d-flex align-items-center">
+            <div class="col-6 p-3">
+              <img
+                class="img-fluid"
+                alt="company logo"
+                src="../static/img/white_logo.png"
+                style="width: 60px"
+              >
+            </div>
+            <div class="col-6 pt-2">
+              <span class="font-weight-bold"> Tax Invoice </span><br>
+              <small>{{ inv }}</small><br>
+              <small>{{ date }}</small>
+            </div>
+          </div>
+          <hr>
+          <!-- table from, to -->
+          <div class="table-responsive p-2">
+            <table class="table table-borderless">
+              <tbody>
+                <tr class="row-12">
+                  <td class="col-6">To:</td>
+                  <td class="col-6">From:</td>
+                </tr>
+                <tr class="content row-12">
+                  <td class="col-6 font-weight-bold">
+                    <select
+                      class="form-select form-select-sm"
+                      name="client"
+                      id="inv_select"
+                    >
+                      <option selected>Select Client</option>
+                      {% for client in clients | unique %}
+                      <option value="{{client}}">{{ client }}</option>
+                      {% endfor %}
+                    </select>
+                  </td>
+                  <td class="col-6 font-weight-bold">
+                    {{ sender.name}}<br>
+                    {{ sender.address }}<br>
+                    {{ sender.city }}, {{ sender.state }} {{ sender.country }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- table items and pricing -->
+          <div class="p-2">
+            <table
+              class="table table-borderless table-stripped"
+              id="invoicedItems"
+            >
+              <thead>
+                <tr class="table-info heading">
+                  <th class="d-none">Name</th>
+                  <th>Description</th>
+                  <th>Rate Per Hour</th>
+                  <th>Total Hours</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="inv-body">
+                {% for service in rows %}
+                <tr class="item">
+                  <td class="d-none">{{ service[2] }}</td>
+                  <td>{{ service[7] }}</td>
+                  <td>{{ service[8] }}</td>
+                  <td>{{ service[9] }}</td>
+                  <td>{{ service[10] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              <tfoot class="fw-bold">
+                <tr class="total">
+                  <td></td>
+                  <td></td>
+                  <td>Sub Total</td>
+                  {% if subtotal %}
+                  <td class="total">{{ subtotal | usd }}</td>
+                  {% endif %}
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <hr />
+          <div class="p-2">
+            <h5 class="text-center">Thank Your For Your Business</h5>
+          </div>
+          <!-- end card -->
+        </div>
+        <div class="col-12 mt-3">
+          <button class="btn btn-col">Create Invoice</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

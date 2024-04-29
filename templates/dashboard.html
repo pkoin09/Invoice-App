@@ -1,0 +1,212 @@
+{% extends "layout.html" %}
+{%block title%}
+Dashboard
+{%endblock%}
+{% block main %}
+<div class="container">
+  <div class="row py-5">
+    <div class="col-12">
+      <div class="mb-3"><h4>MY DASHBOARD</h4></div>
+      <!-- booked -->
+      <div class="row">
+        <div class="col-1">
+          <h6 class="circle bg-primary"></h6>
+        </div>
+        <div class="col-11">
+          <h6 class="text-start">Upcoming Appointments</h6>
+        </div>
+      </div>
+      <hr>
+      <form action="/dashboard" method="post">
+        <input class="form-control" id="booked" type="hidden" value="booked" >
+        <table class="table table-borderless table-striped" data-toggle="table">
+          <thead>
+            <tr class="table-info">
+              <th>Status</th>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Service</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="bookedTableBody">
+            {% for row in rows %}
+            <tr>
+              <td>{{ row[16] }}</td>
+              <td>{{ row[5] }}</td>
+              <td>{{ row[2] }}</td>
+              <td>{{ row[7] }}</td>
+              <td>
+                <div
+                  class="btn btn-col"
+                  type="submit"
+                  data-bs-toggle="modal"
+                  data-bs-target="#dashboardModal"
+                  data-bs-clientId="{{row[1]}}"
+                  data-bs-serviceId="{{row[13]}}"
+                  data-bs-serviceDate="{{row[5]}}"
+                  data-bs-serviceRate="{{row[8]}}"
+                >
+                  Invoice
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <!-- modal -->
+    <div
+      class="modal fade"
+      id="dashboardModal"
+      tabindex="-1"
+      aria-labelledby="dashboardModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-md modal-fullscreen-sm-down"
+      >
+        <div class="modal-content">
+          <!-- modal header -->
+          <div class="modal-header">
+            <h5 class="modal-title" id="dashboardModalTitle">
+              Hours Worked Input
+            </h5>
+            <button
+              type="submit"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="close"
+            ></button>
+          </div>
+          <!-- modal body -->
+          <div class="modal-body">
+            <form action="/invoice" method="post">
+              <input
+                class="form-control"
+                name="clientId"
+                id="clientId"
+                type="number"
+                hidden
+              >
+              <input
+                class="form-control"
+                name="serviceId"
+                id="serviceId"
+                type="number"
+                hidden
+              >
+              <input
+                class="form-control"
+                name="serviceDate"
+                id="serviceDate"
+                type="text"
+                hidden
+              >
+              <input
+                class="form-control"
+                name="serviceRate"
+                id="serviceRate"
+                type="text"
+                hidden
+              >
+              <div class="row">
+                <div class="col-6">
+                  <input type="text" name="hours" id="hours">
+                </div>
+                <div class="col-6">
+                  <button type="submit" class="btn btn-col">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- pending -->
+  <div class="row mb-3">
+    <div class="col-1">
+      <h6 class="circle bg-warning"></h6>
+    </div>
+    <div class="col-11">
+      <h6 class="text-start">Invoice Pending, Service Completed</h6>
+    </div>
+    <input
+      class="form-control"
+      id="inprogress"
+      type="hidden"
+      value="inprogress"
+    >
+    <hr>
+    <table
+      class="table table-borderless table-striped mb-5"
+      id="inprogress-table"
+    >
+      <thead>
+        <tr class="table-info">
+          <th>Status</th>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Service</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="inprogressTableBody">
+        {% for row in rows %}
+        <tr>
+          <td>{{ row[16] }}</td>
+          <td>{{ row[5] }}</td>
+          <td id="client">{{ row[2] }}</td>
+          <td>{{ row[7] }}</td>
+          <td class="total">{{ row[10] }}</td>
+          <td></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- complete -->
+  <div class="row mb-3">
+    <div class="col-1">
+      <h6 class="circle bg-success"></h6>
+    </div>
+    <div class="col-11">
+      <h6 class="text-start">Invoiced. Track Payment.</h6>
+    </div>
+  <hr>
+  <div class="col-12">
+    <input class="form-control" id="complete" type="hidden" value="complete">
+    <table class="table table-borderless table-striped">
+      <thead>
+        <tr class="table-info">
+          <th>Status</th>
+          <th>Inv #</th>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Service</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="completeTableBody">
+        {% for row in rows %}
+        <tr>
+          <td>{{ row[16] }}</td>
+          <td>{{ row[14] }}</td>
+          <td>{{ row[5] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[7] }}</td>
+          <td>{{ row[10] }}</td>
+          <td></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

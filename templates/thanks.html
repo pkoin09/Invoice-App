@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{%block title%}
+Thanks
+{%endblock%}
+{% block main %}
+  <div class="row d-flex align-items-center hero" style="height: 90vmin">
+    <div class="col text-white">
+      <h3>THANK YOU</h3>
+      <p><b>{{ client_name }}</b> has successfully booked an appointment</p>
+      <p>with <b>{{ attache_name }}</b> on <b>{{ serv_date }}</b></p>
+      <p>for <b>{{ service }}</b></p>
+    </div>
+  </div>
+{% endblock %}

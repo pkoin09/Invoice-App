@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{%block title%}
+Admin
+{%endblock%}
+{% block main %}
+<div class="container">
+  <div class="row py-5">
+    <div class="col-12 mb-5">
+      <h3>USERS PERMISSION</h3>
+    </div>
+    <div>
+      <table class="table table-borderless table-striped">
+        <thead>
+          <tr class="table-info">
+            <th>USERNAME</th>
+            <th>ROLE</th>
+            <th>EDIT</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for staff in rows %}
+          <tr>
+            <td>{{staff[0]}}</td>
+            <td>{{staff[1]}}</td>
+            <td>
+              <button
+                type="button"
+                id="roleEditorBtn"
+                class="btn btn-col"
+                data-bs-toggle="modal"
+                data-bs-target="#roleEditModal"
+                data-bs-role="{{staff[1]}}"
+                data-bs-staff="{{staff[0]}}"
+              >
+                EDIT ROLE
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- modal -->
+    <div
+      class="modal fade"
+      id="roleEditModal"
+      tabindex="-1"
+      aria-labelledby="roleEditModal"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="roleModalTitle">EDIT ROLE</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- modal form -->
+            <form action="/admin" method="post">
+              <div class="row mb-3">
+                <div class="col-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="staff"
+                    id="staffModalInput"
+                  >
+                </div>
+                <div class="col-6 text-start">
+                  <select
+                    class="form-select"
+                    name="role"
+                    aria-label="select role"
+                  >
+                    <option disabled>Select Role</option>
+                    <option value="0">Default</option>
+                    <option value="1">Super</option>
+                    <option value="2">Staff</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-6 text-start">
+                <button class="btn btn-col" type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end modal -->
+  </div>
+</div>
+{% endblock %}

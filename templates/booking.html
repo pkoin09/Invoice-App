@@ -1,0 +1,176 @@
+{% extends "layout.html" %}
+{%block title%}
+Book
+{%endblock%}
+{% block main %}
+<div class="container text-main">
+  <div class="row py-5">
+    <div class="col-12"><h4>Book Service</h4></div>
+    <!-- table -->
+    <div class="col-12">
+      <table class="table table-borderless table-striped">
+        <thead>
+          <tr class="table-info fw-bold">
+            <td>Reserve</td>
+            <td>Service</td>
+            <td>Rate</td>
+            <td>Attaché</td>
+            <td class="text-start">Description</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for service in rows %}
+          <tr>
+            <td>
+              <button
+                type="button"
+                class="btn btn-col"
+                data-bs-toggle="modal"
+                data-bs-target="#serviceModal"
+                data-bs-service="{{service}}"
+                data-bs-servId="{{service[4]}}"
+                data-bs-servName="{{service[0]}}"
+                data-bs-servRate="{{service[1]}}"
+                data-bs-servAttache="{{service[2]}}"
+                data-bs-user="{{user}}"
+                data-bs-id="{{id}}"
+              >
+                Book
+              </button>
+            </td>
+            <td>{{service[0]}}</td>
+            <td>{{service[1]}}</td>
+            <td>{{service[2]}}</td>
+            <td class="text-start">{{service[3]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- modal -->
+    <div
+      class="modal fade"
+      id="serviceModal"
+      tabindex="-1"
+      aria-labelledby="serviceModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="serviceModalLabel">Book</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- working space here -->
+
+            <form action="/thanks" method="post">
+              <!-- 1st column -->
+              <div class="row mb-3 text-start">
+                <div class="col-6 text-start">
+                  <label for="client-name" class="col-form-label">Client Name:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="clientName"
+                    name="client"
+                    placeholder="client's name"
+                  >
+                </div>
+                <div class="col-6">
+                  <label for="client-email" class="col-form-label">Email:</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    id="emailAddress"
+                    placeholder="client's email"
+                  >
+                </div>
+              </div>
+              <!-- 2nd column -->
+              <div class="row mb-3 text-start">
+                <div class="col-6 text-start">
+                  <label for="client-name" class="col-form-label">Attache's Name:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="attache"
+                    id="attacheName"
+                    placeholder="attache's name"
+                  >
+                </div>
+                <div class="col-6">
+                  <label for="service-date" class="col-form-label">Date and Time:</label>
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    name="date"
+                    id="serviceDate"
+                  >
+                </div>
+              </div>
+              <div class="div-12 mb-5 text-start">
+                <label for="address" class="col-form-label">Address:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="address"
+                  id="address"
+                  placeholder="Address"
+                >
+              </div>
+              <!-- hidden inputs -->
+              <div class="col-12 text-start">
+                <input
+                  class="form-control"
+                  name="client_id"
+                  id="client_id"
+                  type="hidden"
+                >
+                <input
+                  class="form-control"
+                  name="service"
+                  id="service"
+                  type="hidden"
+                >
+                <input
+                  class="form-control"
+                  name="rate"
+                  id="rate"
+                  type="hidden"
+                >
+                <input
+                  class="form-control"
+                  name="servId"
+                  id="servId"
+                  type="hidden"
+                >
+              </div>
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-col">Submit</button>
+              </div>
+            </form>
+
+            <!-- ending work space -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+Flask==2.2.2
+Flask-Session==0.4.0
+sqlite3
+Werkzeug==2.2.2
+datetime
+weasyprint==57.2
+black==23.3.0

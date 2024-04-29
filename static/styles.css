@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100vmin;
+  }
+
+  /* Size for brand */
+  nav .navbar-brand {
+    font-size: xx-large;
+  }
+
+  /* Colors for brand */
+  nav .navbar-brand .blue {
+    color: #354b98;
+  }
+
+  .hero {
+    background: rgb(148,187,233);
+    background: linear-gradient(47deg, rgba(148,187,233,1) 0%, rgba(59,90,186,1) 52%);
+  }
+
+  .text-main {
+    color: #21294a;
+  }
+
+  .text-main-sec {
+    color: #c9dbf4;
+  }
+
+  .btn-col {
+    background: #5987d8;
+    color: #fff;
+  }
+
+  .btn-col:hover {
+    background: #78a7e2;
+    color: #fff;
+  }
+
+  .circle {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+  }

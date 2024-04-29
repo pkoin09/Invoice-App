@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{%block title%}
+Register
+{%endblock%}
+{% block main %}
+<div class="row d-flex align-items-center hero" style="height: 90vmin">
+  <div class="text-white">
+    <div class="row pb-3">
+      <div class="col-12">
+        <h4 class="mb-3">Registration Page</h4>
+      </div>
+    </div>
+    <div class="row d-flex align-items-center">
+      <div class="col">
+        <form action="/register" method="post">
+          <div class="mb-3">
+            <input
+              autocomplete="off"
+              autofocus
+              class="form-control mx-auto w-auto"
+              id="username"
+              name="username"
+              placeholder="Username"
+              type="text"
+            >
+          </div>
+          <div class="mb-3">
+            <input
+              class="form-control mx-auto w-auto"
+              id="password"
+              name="password"
+              placeholder="Password"
+              type="password"
+            >
+          </div>
+          <div class="mb-3">
+            <input
+              class="form-control mx-auto w-auto"
+              id="confirmation"
+              name="confirmation"
+              placeholder="Confirm Password"
+              type="password"
+            >
+          </div>
+          <button class="btn btn-outline-light btn-lg m-2" type="submit">Register</button>
+          <div><a class="text-white" href="/login">Login</a></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

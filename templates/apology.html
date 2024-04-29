@@ -1,0 +1,15 @@
+{% extends "layout.html" %} {% block title %} Apology {% endblock %}
+{% block
+    main %}
+      <div class="row d-flex align-items-center hero" style="height: 90vmin">
+        <div class="col-12">
+          <!-- https://memegen.link/ -->
+          <img
+            alt="{{ top }}"
+            class="border img-fluid"
+            src="http://memegen.link/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg?alt=https://i.imgur.com/JL1aW25.gif"
+            title="{{ top }}"
+          >
+        </div>
+      </div>
+    {% endblock %}
