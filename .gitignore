@@ -8,4 +8,7 @@
 /.venv/
 
 # mac
-/.ds_store
+/.ds_store/
+
+# session
+/flask_session/
