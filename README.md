@@ -43,7 +43,7 @@ To minimize potential conflicts, it is suggested to install the required librari
 #### Usage
 
 To start using the app, run
-`flask run`
+`python3 app.py`
 Register for an account. The first user has root admin privileges, while the rest of the users have default permissions. Admins can change permissions for users from "default" to either "staff" or "super". The root admin permissions cannot be changed, otherwise there is a risk of being locked out of the app if no other admins exist.
 
 After you are registered, add services under the 'Manage My Services' page. They will now be shown to new users (clients).

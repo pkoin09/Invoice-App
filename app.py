@@ -650,3 +650,7 @@ with sqlite3.connect(":memory:", check_same_thread=False) as conn:
                 return render_template("/dashboard.html")
             else:
                 return apology("unauthorized", 401)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
